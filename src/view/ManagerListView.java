@@ -62,10 +62,12 @@ public class ManagerListView extends JFrame {
 
 	// Create the frame.
 	public ManagerListView() {
-		setTitle("Manager Student List");
+
 		managerListModel = new ManagerListModel();
+		setTitle("Manager Student List");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 850, 750);
+		setBounds(350, 80, 850, 650);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -161,127 +163,130 @@ public class ManagerListView extends JFrame {
 		panel_center.add(scrollPane_table);
 
 		JPanel panel_studentInformation = new JPanel();
-		panel_center.add(panel_studentInformation);
-		panel_studentInformation.setLayout(null);
+		panel_studentInformation.setLayout(new GridLayout(1, 2, 10, 10));
+
+		JPanel panel_studentInformation_left = new JPanel();
+		panel_studentInformation_left.setLayout(new GridLayout(6, 2, 10, 10));
 
 		JLabel label_studentInformation = new JLabel("Student Information");
 		label_studentInformation.setFont(new Font("Tahoma", Font.ITALIC, 14));
-		label_studentInformation.setBounds(0, 0, 142, 13);
-		panel_studentInformation.add(label_studentInformation);
+		panel_studentInformation_left.add(label_studentInformation);
 
-		JLabel label_studentInformation_code = new JLabel("Student Code");
-		label_studentInformation_code.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label_studentInformation_code.setBounds(10, 30, 110, 30);
-		panel_studentInformation.add(label_studentInformation_code);
+		panel_studentInformation_left.add(new JPanel());
 
-		JLabel label_studentInformation_name = new JLabel("Name");
-		label_studentInformation_name.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label_studentInformation_name.setBounds(10, 75, 110, 30);
-		panel_studentInformation.add(label_studentInformation_name);
-
-		JLabel label_studentInformation_birthPlace = new JLabel("Birth Place");
-		label_studentInformation_birthPlace.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label_studentInformation_birthPlace.setBounds(10, 120, 110, 30);
-		panel_studentInformation.add(label_studentInformation_birthPlace);
-
-		JLabel label_studentInformation_birthDay = new JLabel("BirthDay");
-		label_studentInformation_birthDay.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label_studentInformation_birthDay.setBounds(10, 165, 110, 30);
-		panel_studentInformation.add(label_studentInformation_birthDay);
-
-		JLabel label_studentInformation_sex = new JLabel("Sex");
-		label_studentInformation_sex.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label_studentInformation_sex.setBounds(10, 210, 110, 30);
-		panel_studentInformation.add(label_studentInformation_sex);
+		JLabel label_studentInformation_code = new JLabel("Student Code", JLabel.CENTER);
+		label_studentInformation_code.setFont(new Font("Arial", Font.PLAIN, 16));
+		panel_studentInformation_left.add(label_studentInformation_code);
 
 		textField_studentInformation_code = new JTextField();
-		textField_studentInformation_code.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textField_studentInformation_code.setFont(new Font("Arial", Font.PLAIN, 16));
 		textField_studentInformation_code.setColumns(10);
-		textField_studentInformation_code.setBounds(140, 30, 200, 30);
-		panel_studentInformation.add(textField_studentInformation_code);
+		panel_studentInformation_left.add(textField_studentInformation_code);
+
+		JLabel label_studentInformation_name = new JLabel("Name", JLabel.CENTER);
+		label_studentInformation_name.setFont(new Font("Arial", Font.PLAIN, 16));
+		panel_studentInformation_left.add(label_studentInformation_name);
 
 		textField_studentInformation_name = new JTextField();
-		textField_studentInformation_name.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textField_studentInformation_name.setFont(new Font("Arial", Font.PLAIN, 16));
 		textField_studentInformation_name.setColumns(10);
-		textField_studentInformation_name.setBounds(140, 75, 200, 30);
-		panel_studentInformation.add(textField_studentInformation_name);
+		panel_studentInformation_left.add(textField_studentInformation_name);
 
-		textField_studentInformation_birthDay = new JTextField();
-		textField_studentInformation_birthDay.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_studentInformation_birthDay.setColumns(10);
-		textField_studentInformation_birthDay.setBounds(140, 165, 200, 30);
-		panel_studentInformation.add(textField_studentInformation_birthDay);
+		JLabel label_studentInformation_birthPlace = new JLabel("Birth Place", JLabel.CENTER);
+		label_studentInformation_birthPlace.setFont(new Font("Arial", Font.PLAIN, 16));
+		panel_studentInformation_left.add(label_studentInformation_birthPlace);
 
 		comboBox_studentInformation_birthPlace = new JComboBox<String>(ProvinceList.getProvinceNameList());
-		comboBox_studentInformation_birthPlace.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		comboBox_studentInformation_birthPlace.setBounds(140, 120, 200, 30);
+		comboBox_studentInformation_birthPlace.setFont(new Font("Arial", Font.PLAIN, 14));
 		comboBox_studentInformation_birthPlace.setSelectedIndex(-1);
-		panel_studentInformation.add(comboBox_studentInformation_birthPlace);
+		panel_studentInformation_left.add(comboBox_studentInformation_birthPlace);
+
+		JLabel label_studentInformation_birthDay = new JLabel("BirthDay", JLabel.CENTER);
+		label_studentInformation_birthDay.setFont(new Font("Arial", Font.PLAIN, 16));
+		panel_studentInformation_left.add(label_studentInformation_birthDay);
+
+		textField_studentInformation_birthDay = new JTextField();
+		textField_studentInformation_birthDay.setFont(new Font("Arial", Font.PLAIN, 16));
+		textField_studentInformation_birthDay.setColumns(10);
+		panel_studentInformation_left.add(textField_studentInformation_birthDay);
+
+		JLabel label_studentInformation_sex = new JLabel("Sex", JLabel.CENTER);
+		label_studentInformation_sex.setFont(new Font("Arial", Font.PLAIN, 16));
+		panel_studentInformation_left.add(label_studentInformation_sex);
+
+		JPanel panel_male_female = new JPanel();
+		panel_male_female.setLayout(new GridLayout(1, 2));
+
 
 		radioButton_studentInformation_sex_male = new JRadioButton("Male");
 		radioButton_studentInformation_sex_male.setActionCommand("Male");
-		radioButton_studentInformation_sex_male.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		radioButton_studentInformation_sex_male.setBounds(140, 210, 100, 30);
+		radioButton_studentInformation_sex_male.setFont(new Font("Arial", Font.PLAIN, 16));
 		radioButton_studentInformation_sex_male.addActionListener(action);
-		panel_studentInformation.add(radioButton_studentInformation_sex_male);
+		panel_male_female.add(radioButton_studentInformation_sex_male);
 
 		radioButton_studentInformation_sex_female = new JRadioButton("Female");
 		radioButton_studentInformation_sex_female.setActionCommand("Female");
-		radioButton_studentInformation_sex_female.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		radioButton_studentInformation_sex_female.setBounds(240, 210, 100, 30);
+		radioButton_studentInformation_sex_female.setFont(new Font("Arial", Font.PLAIN, 16));
 		radioButton_studentInformation_sex_female.addActionListener(action);
-		panel_studentInformation.add(radioButton_studentInformation_sex_female);
+		panel_male_female.add(radioButton_studentInformation_sex_female);
+
+		panel_studentInformation_left.add(panel_male_female);
 
 		bg_sex = new ButtonGroup();
 		bg_sex.add(radioButton_studentInformation_sex_male);
 		bg_sex.add(radioButton_studentInformation_sex_female);
 
-		JLabel label_studentInformation_score_1 = new JLabel("Score of subject 1");
-		label_studentInformation_score_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label_studentInformation_score_1.setBounds(390, 30, 140, 30);
-		panel_studentInformation.add(label_studentInformation_score_1);
+		JPanel panel_studentInformation_right = new JPanel();
+		panel_studentInformation_right.setLayout(new GridLayout(6, 2, 10, 10));
+
+		panel_studentInformation_right.add(new JPanel());
+		panel_studentInformation_right.add(new JPanel());
+
+		JLabel label_studentInformation_score_1 = new JLabel("Score of subject 1", JLabel.CENTER);
+		label_studentInformation_score_1.setFont(new Font("Arial", Font.PLAIN, 16));
+		panel_studentInformation_right.add(label_studentInformation_score_1);
 
 		textField_scoreOfSubject1 = new JTextField();
-		textField_scoreOfSubject1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textField_scoreOfSubject1.setFont(new Font("Arial", Font.PLAIN, 16));
 		textField_scoreOfSubject1.setColumns(10);
-		textField_scoreOfSubject1.setBounds(550, 30, 200, 30);
-		panel_studentInformation.add(textField_scoreOfSubject1);
+		panel_studentInformation_right.add(textField_scoreOfSubject1);
 
-		JLabel label_studentInformation_score_2 = new JLabel("Score of subject 2");
-		label_studentInformation_score_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label_studentInformation_score_2.setBounds(390, 75, 140, 30);
-		panel_studentInformation.add(label_studentInformation_score_2);
+		JLabel label_studentInformation_score_2 = new JLabel("Score of subject 2", JLabel.CENTER);
+		label_studentInformation_score_2.setFont(new Font("Arial", Font.PLAIN, 16));
+		panel_studentInformation_right.add(label_studentInformation_score_2);
 
 		textField_scoreOfSubject2 = new JTextField();
-		textField_scoreOfSubject2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textField_scoreOfSubject2.setFont(new Font("Arial", Font.PLAIN, 16));
 		textField_scoreOfSubject2.setColumns(10);
-		textField_scoreOfSubject2.setBounds(550, 75, 200, 30);
-		panel_studentInformation.add(textField_scoreOfSubject2);
+		panel_studentInformation_right.add(textField_scoreOfSubject2);
 
-		JLabel label_studentInformation_score_3 = new JLabel("Score of subject 3");
-		label_studentInformation_score_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label_studentInformation_score_3.setBounds(390, 120, 140, 30);
-		panel_studentInformation.add(label_studentInformation_score_3);
-
-		JLabel label_studentInformation_total = new JLabel("Total");
-		label_studentInformation_total.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label_studentInformation_total.setBounds(390, 165, 140, 30);
-		panel_studentInformation.add(label_studentInformation_total);
+		JLabel label_studentInformation_score_3 = new JLabel("Score of subject 3", JLabel.CENTER);
+		label_studentInformation_score_3.setFont(new Font("Arial", Font.PLAIN, 16));
+		panel_studentInformation_right.add(label_studentInformation_score_3);
 
 		textField_scoreOfSubject3 = new JTextField();
-		textField_scoreOfSubject3.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textField_scoreOfSubject3.setFont(new Font("Arial", Font.PLAIN, 16));
 		textField_scoreOfSubject3.setColumns(10);
-		textField_scoreOfSubject3.setBounds(550, 120, 200, 30);
-		panel_studentInformation.add(textField_scoreOfSubject3);
+		panel_studentInformation_right.add(textField_scoreOfSubject3);
+
+		JLabel label_studentInformation_total = new JLabel("Total", JLabel.CENTER);
+		label_studentInformation_total.setFont(new Font("Arial", Font.PLAIN, 16));
+		panel_studentInformation_right.add(label_studentInformation_total);
 
 		label_total = new JLabel("0.0");
-		label_total.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label_total.setBounds(550, 165, 200, 30);
-		panel_studentInformation.add(label_total);
+		label_total.setFont(new Font("Arial", Font.PLAIN, 16));
+		panel_studentInformation_right.add(label_total);
 
-		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 263, 806, 2);
-		panel_studentInformation.add(separator);
+		panel_studentInformation_right.add(new JPanel());
+		panel_studentInformation_right.add(new JPanel());
+
+		panel_studentInformation.add(panel_studentInformation_left);
+		panel_studentInformation.add(panel_studentInformation_right);
+		panel_center.add(panel_studentInformation);
+
+		// JSeparator separator = new JSeparator();
+		// separator.setBounds(10, 263, 806, 2);
+		// panel_studentInformation.add(separator);
 
 		JPanel panel_button = new JPanel();
 		panel_button.setPreferredSize(new Dimension(20, 50));
