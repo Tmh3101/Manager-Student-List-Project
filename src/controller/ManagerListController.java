@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JOptionPane;
 import view.ManagerListView;
 
@@ -44,6 +45,8 @@ public class ManagerListController implements ActionListener {
 			managerListView.saveStudentListToFile();
 		} else if (cmd.equals("Open")) {
 			managerListView.loadStudentListFromFile();
+		} else if (cmd.equals("About Me")){
+			managerListView.showMyInformation();
 		}
 
 	}

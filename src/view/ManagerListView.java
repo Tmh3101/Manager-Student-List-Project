@@ -34,6 +34,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
+import aboutme.AboutMeView;
 import controller.ManagerListController;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
@@ -66,6 +67,7 @@ public class ManagerListView extends JFrame {
 		managerListModel = new ManagerListModel();
 		setTitle("Manager Student List");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
 		setBounds(350, 80, 850, 650);
 		setResizable(false);
 		contentPane = new JPanel();
@@ -98,6 +100,7 @@ public class ManagerListView extends JFrame {
 
 		JMenu menu_about = new JMenu("About");
 		JMenuItem menuItem_AboutMe = new JMenuItem("About Me");
+		menuItem_AboutMe.addActionListener(action);
 		menuBar.add(menu_about);
 		menu_about.add(menuItem_AboutMe);
 
@@ -561,6 +564,11 @@ public class ManagerListView extends JFrame {
 			setTable(managerListModel.getStudentList());
 			JOptionPane.showMessageDialog(this, "Open student successfully");
 		}
+	}
+
+	public void showMyInformation(){
+
+		new AboutMeView();
 	}
 
 }
