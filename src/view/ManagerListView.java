@@ -12,6 +12,7 @@ import model.Student;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,6 +29,7 @@ import javax.swing.KeyStroke;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JRadioButton;
@@ -66,6 +68,7 @@ public class ManagerListView extends JFrame {
 
 		managerListModel = new ManagerListModel();
 		setTitle("Manager Student List");
+		setIconImage(Toolkit.getDefaultToolkit().createImage(ManagerListView.class.getResource("icon_list.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setBounds(350, 80, 850, 650);
@@ -83,11 +86,15 @@ public class ManagerListView extends JFrame {
 
 		JMenu menu_file = new JMenu("File");
 		JMenuItem menuItem_open = new JMenuItem("Open");
+		menuItem_open.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(ManagerListView.class.getResource("icon_open.png"))));
 		menuItem_open.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK));
 		menuItem_open.addActionListener(action);
+
 		JMenuItem menuItem_save = new JMenuItem("Save");
+		menuItem_save.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(ManagerListView.class.getResource("icon_save.png"))));
 		menuItem_save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
 		menuItem_save.addActionListener(action);
+
 		JMenuItem menuItem_exit = new JMenuItem("Exit", KeyEvent.VK_E);
 		menuItem_exit.addActionListener(action);
 		menuItem_exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_DOWN_MASK));
@@ -100,6 +107,7 @@ public class ManagerListView extends JFrame {
 
 		JMenu menu_about = new JMenu("About");
 		JMenuItem menuItem_AboutMe = new JMenuItem("About Me");
+		menuItem_AboutMe.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().createImage(ManagerListView.class.getResource("icon_aboutme.png"))));
 		menuItem_AboutMe.addActionListener(action);
 		menuBar.add(menu_about);
 		menu_about.add(menuItem_AboutMe);
@@ -287,10 +295,6 @@ public class ManagerListView extends JFrame {
 		panel_studentInformation.add(panel_studentInformation_right);
 		panel_center.add(panel_studentInformation);
 
-		// JSeparator separator = new JSeparator();
-		// separator.setBounds(10, 263, 806, 2);
-		// panel_studentInformation.add(separator);
-
 		JPanel panel_button = new JPanel();
 		panel_button.setPreferredSize(new Dimension(20, 50));
 		contentPane.add(panel_button, BorderLayout.SOUTH);
@@ -454,7 +458,6 @@ public class ManagerListView extends JFrame {
 			button_edit.setText("Done");
 		} catch (Exception e1) {
 			JOptionPane.showMessageDialog(this, "Let choose a student");
-			// e1.printStackTrace();
 		}
 	}
 
@@ -567,7 +570,6 @@ public class ManagerListView extends JFrame {
 	}
 
 	public void showMyInformation(){
-
 		new AboutMeView();
 	}
 

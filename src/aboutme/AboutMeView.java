@@ -1,6 +1,7 @@
 package aboutme;
 
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,6 +16,7 @@ public class AboutMeView extends JFrame {
 	//Create the frame.
 	public AboutMeView() {
 		setTitle("About Me");
+		setIconImage(Toolkit.getDefaultToolkit().createImage(AboutMeView.class.getResource("icon_aboutme.png")));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 540, 540);
 		setLocationRelativeTo(null);
