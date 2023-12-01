@@ -63,7 +63,7 @@ public class ManagerListModel {
 	
 	public boolean isDuplicate(String code) {
 		for (Student st : studentList) {
-			if(st.getCode().equals(code)) return true;
+			if(st.getId().equals(code)) return true;
 		}
 		return false;
 	}

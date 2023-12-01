@@ -11,6 +11,7 @@ import model.ProvinceList;
 import model.Student;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
@@ -35,6 +36,7 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JTable;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import aboutme.AboutMeView;
@@ -48,22 +50,57 @@ public class ManagerListView extends JFrame {
 	
 	private JPanel contentPane;
 	private ManagerListModel managerListModel;
-	JCheckBoxMenuItem chechBoxItem_darkMode;
-	private JTextField textField_stuIDFilter;
+	private JCheckBoxMenuItem chechBoxItem_darkMode;
 	private JTable table;
-	private JTextField textField_stuInfor_id;
-	private JTextField textField_studInfor_name;
-	private JTextField textField_stuInfor_dOB;
-	private JTextField textField_score1;
-	private JTextField textField_score2;
-	private JTextField textField_score3;
 	private JComboBox<String> comboBox_stuInfor_pOB;
 	private ButtonGroup bg_sex;
 	private JLabel label_total;
 	private JRadioButton radioButton_stuInfor_male;
 	private JRadioButton radioButton_stuInfor_female;
-	private JButton button_edit;
 	private JComboBox<String> comboBox_filter_pOB;
+
+
+	private JPanel panel_filter;
+	private JLabel label_stuFilter;
+	private JLabel label_pOBFilter;
+	private JLabel label_stuIDFilter;
+	private JTextField textField_stuIDFilter;
+	private JButton button_search;
+	private JButton button_cancelSearch;
+
+	private JPanel panel_stuInfor_left;
+	private JLabel label_stuInfor;
+	private JPanel panel_empty1;
+	private JLabel label_stuInfor_id;
+	private JTextField textField_stuInfor_id;
+	private JLabel label_stuInfor_name;
+	private JTextField textField_studInfor_name;
+	private JLabel label_stuInfor_pOB;
+	private JLabel label_stuInfor_dOB;
+	private JTextField textField_stuInfor_dOB;
+	private JLabel label_stuInfor_sex;
+	private JPanel panel_male_female;
+
+	private JPanel panel_stuInfor;
+	private JPanel panel_stuInfor_right;
+	private JPanel panel_empty2;
+	private JPanel panel_empty3;
+	private JLabel label_stuInfor_score1;
+	private JTextField textField_score1;
+	private JLabel label_stuInfor_score2;
+	private JTextField textField_score2;
+	private JLabel label_stuInfor_score3;
+	private JTextField textField_score3;
+	private JLabel label_stuInfor_total;
+	private JPanel panel_empty4;
+	private JPanel panel_empty5;
+
+	private JPanel panel_button;
+	private JButton button_insert;
+	private JButton button_delete;
+	private JButton button_edit;
+	private JButton button_clear;
+
 
 
 	// Create the frame.
@@ -110,6 +147,7 @@ public class ManagerListView extends JFrame {
 
 		JMenu menu_view = new JMenu("View");
 		chechBoxItem_darkMode = new JCheckBoxMenuItem("Dark Mode");
+		chechBoxItem_darkMode.addActionListener(action);
 		menu_view.add(chechBoxItem_darkMode);
 		menuBar.add(menu_view);
 
@@ -120,17 +158,17 @@ public class ManagerListView extends JFrame {
 		menuBar.add(menu_about);
 		menu_about.add(menuItem_aboutMe);
 
-		JPanel panel_filter = new JPanel();
+		panel_filter = new JPanel();
 		panel_filter.setPreferredSize(new Dimension(20, 80));
 		contentPane.add(panel_filter, BorderLayout.NORTH);
 		panel_filter.setLayout(null);
 
-		JLabel label_stuFilter = new JLabel("Student Filter");
+		label_stuFilter = new JLabel("Student Filter");
 		label_stuFilter.setFont(new Font("Tahoma", Font.ITALIC, 14));
 		label_stuFilter.setBounds(0, 0, 90, 15);
 		panel_filter.add(label_stuFilter);
 
-		JLabel label_pOBFilter = new JLabel("Bitrth Place");
+		label_pOBFilter = new JLabel("Bitrth Place");
 		label_pOBFilter.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		label_pOBFilter.setBounds(20, 30, 90, 25);
 		panel_filter.add(label_pOBFilter);
@@ -141,7 +179,7 @@ public class ManagerListView extends JFrame {
 		comboBox_filter_pOB.setSelectedIndex(-1);
 		panel_filter.add(comboBox_filter_pOB);
 
-		JLabel label_stuIDFilter = new JLabel("Student Code");
+		label_stuIDFilter = new JLabel("Student ID");
 		label_stuIDFilter.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		label_stuIDFilter.setBounds(250, 30, 95, 25);
 		panel_filter.add(label_stuIDFilter);
@@ -152,13 +190,13 @@ public class ManagerListView extends JFrame {
 		panel_filter.add(textField_stuIDFilter);
 		textField_stuIDFilter.setColumns(10);
 
-		JButton button_search = new JButton("Search");
+		button_search = new JButton("Search");
 		button_search.addActionListener(action);
 		button_search.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		button_search.setBounds(525, 30, 125, 25);
 		panel_filter.add(button_search);
 
-		JButton button_cancelSearch = new JButton("Cancel Search");
+		button_cancelSearch = new JButton("Cancel Search");
 		button_cancelSearch.addActionListener(action);
 		button_cancelSearch.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		button_cancelSearch.setBounds(670, 30, 125, 25);
@@ -172,7 +210,7 @@ public class ManagerListView extends JFrame {
 		table = new JTable();
 		table.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		table.setModel(new DefaultTableModel(new Object[][] {},
-				new String[] { "Code", "Name", "Birth Palce", "Birth Day", "Sex", "Score 1", "Score 2", "Score 3" }));
+				new String[] { "ID", "Name", "Birth Palce", "Birth Day", "Sex", "Score 1", "Score 2", "Score 3" }));
 		table.getColumnModel().getColumn(1).setPreferredWidth(150);
 		table.getColumnModel().getColumn(2).setPreferredWidth(110);
 		table.getColumnModel().getColumn(3).setPreferredWidth(110);
@@ -181,18 +219,21 @@ public class ManagerListView extends JFrame {
 		JScrollPane scrollPane_table = new JScrollPane(table);
 		panel_center.add(scrollPane_table);
 
-		JPanel panel_stuInfor = new JPanel();
+		panel_stuInfor = new JPanel();
 		panel_stuInfor.setLayout(new GridLayout(1, 2, 10, 10));
 
-		JPanel panel_stuInfor_left = new JPanel();
+
+		panel_stuInfor_left = new JPanel();
 		panel_stuInfor_left.setLayout(new GridLayout(6, 2, 10, 10));
 
-		JLabel label_stuInfor = new JLabel("Student Information");
+		label_stuInfor = new JLabel("Student Information");
 		label_stuInfor.setFont(new Font("Tahoma", Font.ITALIC, 14));
 		panel_stuInfor_left.add(label_stuInfor);
-		panel_stuInfor_left.add(new JPanel());
 
-		JLabel label_stuInfor_id = new JLabel("Student Code", JLabel.CENTER);
+		panel_empty1 = new JPanel();
+		panel_stuInfor_left.add(panel_empty1);
+
+		label_stuInfor_id = new JLabel("Student ID", JLabel.CENTER);
 		label_stuInfor_id.setFont(new Font("Arial", Font.PLAIN, 16));
 		panel_stuInfor_left.add(label_stuInfor_id);
 
@@ -201,7 +242,7 @@ public class ManagerListView extends JFrame {
 		textField_stuInfor_id.setColumns(10);
 		panel_stuInfor_left.add(textField_stuInfor_id);
 
-		JLabel label_stuInfor_name = new JLabel("Name", JLabel.CENTER);
+		label_stuInfor_name = new JLabel("Name", JLabel.CENTER);
 		label_stuInfor_name.setFont(new Font("Arial", Font.PLAIN, 16));
 		panel_stuInfor_left.add(label_stuInfor_name);
 
@@ -210,7 +251,7 @@ public class ManagerListView extends JFrame {
 		textField_studInfor_name.setColumns(10);
 		panel_stuInfor_left.add(textField_studInfor_name);
 
-		JLabel label_stuInfor_pOB = new JLabel("Birth Place", JLabel.CENTER);
+		label_stuInfor_pOB = new JLabel("Birth Place", JLabel.CENTER);
 		label_stuInfor_pOB.setFont(new Font("Arial", Font.PLAIN, 16));
 		panel_stuInfor_left.add(label_stuInfor_pOB);
 
@@ -219,20 +260,20 @@ public class ManagerListView extends JFrame {
 		comboBox_stuInfor_pOB.setSelectedIndex(-1);
 		panel_stuInfor_left.add(comboBox_stuInfor_pOB);
 
-		JLabel label_stuInforn_dOB = new JLabel("BirthDay", JLabel.CENTER);
-		label_stuInforn_dOB.setFont(new Font("Arial", Font.PLAIN, 16));
-		panel_stuInfor_left.add(label_stuInforn_dOB);
+		label_stuInfor_dOB = new JLabel("BirthDay", JLabel.CENTER);
+		label_stuInfor_dOB.setFont(new Font("Arial", Font.PLAIN, 16));
+		panel_stuInfor_left.add(label_stuInfor_dOB);
 
 		textField_stuInfor_dOB = new JTextField();
 		textField_stuInfor_dOB.setFont(new Font("Arial", Font.PLAIN, 16));
 		textField_stuInfor_dOB.setColumns(10);
 		panel_stuInfor_left.add(textField_stuInfor_dOB);
 
-		JLabel label_stuInfor_sex = new JLabel("Sex", JLabel.CENTER);
+		label_stuInfor_sex = new JLabel("Sex", JLabel.CENTER);
 		label_stuInfor_sex.setFont(new Font("Arial", Font.PLAIN, 16));
 		panel_stuInfor_left.add(label_stuInfor_sex);
 
-		JPanel panel_male_female = new JPanel();
+		panel_male_female = new JPanel();
 		panel_male_female.setLayout(new GridLayout(1, 2));
 
 
@@ -254,13 +295,16 @@ public class ManagerListView extends JFrame {
 		bg_sex.add(radioButton_stuInfor_male);
 		bg_sex.add(radioButton_stuInfor_female);
 
-		JPanel panel_stuInfor_right = new JPanel();
+		panel_stuInfor_right = new JPanel();
 		panel_stuInfor_right.setLayout(new GridLayout(6, 2, 10, 10));
 
-		panel_stuInfor_right.add(new JPanel());
-		panel_stuInfor_right.add(new JPanel());
+		panel_empty2 = new JPanel();
+		panel_stuInfor_right.add(panel_empty2);
 
-		JLabel label_stuInfor_score1 = new JLabel("Score of subject 1", JLabel.CENTER);
+		panel_empty3 = new JPanel();
+		panel_stuInfor_right.add(panel_empty3);
+
+		label_stuInfor_score1 = new JLabel("Score of subject 1", JLabel.CENTER);
 		label_stuInfor_score1.setFont(new Font("Arial", Font.PLAIN, 16));
 		panel_stuInfor_right.add(label_stuInfor_score1);
 
@@ -269,7 +313,7 @@ public class ManagerListView extends JFrame {
 		textField_score1.setColumns(10);
 		panel_stuInfor_right.add(textField_score1);
 
-		JLabel label_stuInfor_score2 = new JLabel("Score of subject 2", JLabel.CENTER);
+		label_stuInfor_score2 = new JLabel("Score of subject 2", JLabel.CENTER);
 		label_stuInfor_score2.setFont(new Font("Arial", Font.PLAIN, 16));
 		panel_stuInfor_right.add(label_stuInfor_score2);
 
@@ -278,7 +322,7 @@ public class ManagerListView extends JFrame {
 		textField_score2.setColumns(10);
 		panel_stuInfor_right.add(textField_score2);
 
-		JLabel label_stuInfor_score3 = new JLabel("Score of subject 3", JLabel.CENTER);
+		label_stuInfor_score3 = new JLabel("Score of subject 3", JLabel.CENTER);
 		label_stuInfor_score3.setFont(new Font("Arial", Font.PLAIN, 16));
 		panel_stuInfor_right.add(label_stuInfor_score3);
 
@@ -287,7 +331,7 @@ public class ManagerListView extends JFrame {
 		textField_score3.setColumns(10);
 		panel_stuInfor_right.add(textField_score3);
 
-		JLabel label_stuInfor_total = new JLabel("Total", JLabel.CENTER);
+		label_stuInfor_total = new JLabel("Total", JLabel.CENTER);
 		label_stuInfor_total.setFont(new Font("Arial", Font.PLAIN, 16));
 		panel_stuInfor_right.add(label_stuInfor_total);
 
@@ -295,34 +339,37 @@ public class ManagerListView extends JFrame {
 		label_total.setFont(new Font("Arial", Font.PLAIN, 16));
 		panel_stuInfor_right.add(label_total);
 
-		panel_stuInfor_right.add(new JPanel());
-		panel_stuInfor_right.add(new JPanel());
+		panel_empty4 = new JPanel();
+		panel_stuInfor_right.add(panel_empty4);
+
+		panel_empty5 = new JPanel();
+		panel_stuInfor_right.add(panel_empty5);
 
 		panel_stuInfor.add(panel_stuInfor_left);
 		panel_stuInfor.add(panel_stuInfor_right);
 		panel_center.add(panel_stuInfor);
 
-		JPanel panel_button = new JPanel();
+		panel_button = new JPanel();
 		panel_button.setPreferredSize(new Dimension(20, 50));
 		contentPane.add(panel_button, BorderLayout.SOUTH);
 		panel_button.setLayout(new GridLayout(1, 4, 25, 0));
 
-		JButton button_Insert = new JButton("Insert");
-		button_Insert.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		button_Insert.addActionListener(action);
-		panel_button.add(button_Insert);
+		button_insert = new JButton("Insert");
+		button_insert.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		button_insert.addActionListener(action);
+		panel_button.add(button_insert);
 
-		JButton button_detele = new JButton("Delete");
-		button_detele.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		button_detele.addActionListener(action);
-		panel_button.add(button_detele);
+		button_delete = new JButton("Delete");
+		button_delete.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		button_delete.addActionListener(action);
+		panel_button.add(button_delete);
 
 		button_edit = new JButton("Edit");
 		button_edit.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		button_edit.addActionListener(action);
 		panel_button.add(button_edit);
 
-		JButton button_clear = new JButton("Clear");
+		button_clear = new JButton("Clear");
 		button_clear.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		button_clear.addActionListener(action);
 		panel_button.add(button_clear);
@@ -404,7 +451,6 @@ public class ManagerListView extends JFrame {
 					Float.valueOf(textField_score3.getText()));
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Information is not valid");
-			// e.printStackTrace();
 			return null;
 		}
 		return student;
@@ -426,18 +472,18 @@ public class ManagerListView extends JFrame {
 	@SuppressWarnings("deprecation")
 	public void insertStudent() {
 		if (managerListModel.isDuplicate(textField_stuInfor_id.getText())) {
-			JOptionPane.showMessageDialog(this, "Student code is duplicate");
+			JOptionPane.showMessageDialog(this, "Student id is duplicate");
 		} else {
 			Student student = getStudentFromForm();
 			if (student != null) {
 				managerListModel.insert(student);
 				DefaultTableModel dtm = (DefaultTableModel) table.getModel();
-				dtm.addRow(new Object[] { student.getCode(), student.getName(), student.getBirthPlace(),
+				dtm.addRow(new Object[] { student.getId(), student.getName(), student.getBirthPlace(),
 						student.getBirthDay().getDate() + "/" + (student.getBirthDay().getMonth() + 1) + "/"
 								+ (student.getBirthDay().getYear() + 1900),
-						(student.isSex_isMale()) ? "Male" : "Female", student.getScore_1(), student.getScore_2(),
-						student.getScore_3() });
-				label_total.setText((student.getScore_1() + student.getScore_2() + student.getScore_3()) + "");
+						(student.isSex_isMale()) ? "Male" : "Female", student.getScore1(), student.getScore2(),
+						student.getScore3() });
+				label_total.setText((student.getScore1() + student.getScore2() + student.getScore3()) + "");
 				JOptionPane.showMessageDialog(this, "Insert student successfully");
 			}
 		}
@@ -447,7 +493,7 @@ public class ManagerListView extends JFrame {
 	public void loadStudentToFormToEdit() {
 		try {
 			Student student = getSelectedStudent();
-			textField_stuInfor_id.setText(student.getCode());
+			textField_stuInfor_id.setText(student.getId());
 			textField_studInfor_name.setText(student.getName());
 			comboBox_stuInfor_pOB.setSelectedIndex(managerListModel.getProvinceList().getIndexOf(student.getBirthPlace()) + 1);
 			textField_stuInfor_dOB.setText(student.getBirthDay().getDate() + "/"
@@ -456,10 +502,10 @@ public class ManagerListView extends JFrame {
 				radioButton_stuInfor_male.setSelected(true);
 			else
 				radioButton_stuInfor_female.setSelected(true);
-			textField_score1.setText(student.getScore_1() + "");
-			textField_score2.setText(student.getScore_2() + "");
-			textField_score3.setText(student.getScore_3() + "");
-			label_total.setText((student.getScore_1() + student.getScore_2() + student.getScore_3()) + "");
+			textField_score1.setText(student.getScore1() + "");
+			textField_score2.setText(student.getScore2() + "");
+			textField_score3.setText(student.getScore3() + "");
+			label_total.setText((student.getScore1() + student.getScore2() + student.getScore3()) + "");
 
 			button_edit.setText("Done");
 		} catch (Exception e1) {
@@ -479,15 +525,15 @@ public class ManagerListView extends JFrame {
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 		managerListModel.getStudentList().get(table.getSelectedRow()).edit(student);
 		int i = 0;
-		dtm.setValueAt(student.getCode(), table.getSelectedRow(), i++);
+		dtm.setValueAt(student.getId(), table.getSelectedRow(), i++);
 		dtm.setValueAt(student.getName(), table.getSelectedRow(), i++);
 		dtm.setValueAt(student.getBirthPlace(), table.getSelectedRow(), i++);
 		dtm.setValueAt(student.getBirthDay().getDate() + "/" + (student.getBirthDay().getMonth() + 1) + "/"
 				+ (student.getBirthDay().getYear() + 1900), table.getSelectedRow(), i++);
 		dtm.setValueAt((student.isSex_isMale()) ? "Male" : "Female", table.getSelectedRow(), i++);
-		dtm.setValueAt(student.getScore_1(), table.getSelectedRow(), i++);
-		dtm.setValueAt(student.getScore_2(), table.getSelectedRow(), i++);
-		dtm.setValueAt(student.getScore_3(), table.getSelectedRow(), i++);
+		dtm.setValueAt(student.getScore1(), table.getSelectedRow(), i++);
+		dtm.setValueAt(student.getScore2(), table.getSelectedRow(), i++);
+		dtm.setValueAt(student.getScore3(), table.getSelectedRow(), i++);
 	}
 
 	public void removeStudent() {
@@ -511,11 +557,11 @@ public class ManagerListView extends JFrame {
 		dtm.setRowCount(0);
 
 		for (Student student : list) {
-			dtm.addRow(new Object[] { student.getCode(), student.getName(), student.getBirthPlace(),
+			dtm.addRow(new Object[] { student.getId(), student.getName(), student.getBirthPlace(),
 					student.getBirthDay().getDate() + "/" + (student.getBirthDay().getMonth() + 1) + "/"
 							+ (student.getBirthDay().getYear() + 1900),
-					(student.isSex_isMale()) ? "Male" : "Female", student.getScore_1(), student.getScore_2(),
-					student.getScore_3() });
+					(student.isSex_isMale()) ? "Male" : "Female", student.getScore1(), student.getScore2(),
+					student.getScore3() });
 		}
 	}
 
@@ -530,7 +576,7 @@ public class ManagerListView extends JFrame {
 		} else if (comboBox_filter_pOB.getSelectedIndex() == -1
 				&& !(textField_stuIDFilter.getText().isEmpty())) {
 			for (Student student : managerListModel.getStudentList()) {
-				if (student.getCode().equals(textField_stuIDFilter.getText()))
+				if (student.getId().equals(textField_stuIDFilter.getText()))
 					filteredList.add(student);
 			}
 			setTable(filteredList);
@@ -538,7 +584,7 @@ public class ManagerListView extends JFrame {
 				&& !(textField_stuIDFilter.getText().isEmpty())) {
 			for (Student student : managerListModel.getStudentList()) {
 				if (student.getBirthPlace().getName().equals(comboBox_filter_pOB.getSelectedItem().toString())
-						&& student.getCode().equals(textField_stuIDFilter.getText()))
+						&& student.getId().equals(textField_stuIDFilter.getText()))
 					filteredList.add(student);
 			}
 			setTable(filteredList);
@@ -577,6 +623,160 @@ public class ManagerListView extends JFrame {
 
 	public void showMyInformation(){
 		new AboutMeView();
+	}
+
+	public void onDarkMode(){
+		if(chechBoxItem_darkMode.isSelected()){
+			contentPane.setBackground(Color.decode("#353b48"));
+
+			//filter
+			panel_filter.setBackground(Color.decode("#353b48"));
+			label_stuFilter.setForeground(Color.decode("#ecf0f1"));
+			label_pOBFilter.setForeground(Color.decode("#ecf0f1"));
+
+			comboBox_filter_pOB.setOpaque(true);
+			comboBox_filter_pOB.setBackground(Color.decode("#808e9b"));
+			comboBox_filter_pOB.setForeground(Color.decode("#ecf0f1"));
+
+			label_stuIDFilter.setForeground(Color.decode("#ecf0f1"));
+
+			textField_stuIDFilter.setBackground(Color.decode("#808e9b"));
+			textField_stuIDFilter.setForeground(Color.decode("#ecf0f1"));
+
+			button_search.setBackground(Color.decode("#808e9b"));
+			button_search.setForeground(Color.decode("#ecf0f1"));
+
+			button_cancelSearch.setBackground(Color.decode("#808e9b"));
+			button_cancelSearch.setForeground(Color.decode("#ecf0f1"));
+
+			//table
+			DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
+
+			dtcr.setBackground(Color.decode("#808e9b"));
+			dtcr.setForeground(Color.decode("#ecf0f1"));
+
+			for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
+                table.getColumnModel().getColumn(i).setCellRenderer(dtcr);
+            }
+			
+
+
+			//infor
+			panel_stuInfor.setBackground(Color.decode("#353b48"));
+
+			panel_stuInfor_left.setBackground(Color.decode("#353b48"));
+
+			label_stuInfor.setOpaque(true);
+			label_stuInfor.setBackground(Color.decode("#353b48"));
+			label_stuInfor.setForeground(Color.decode("#ecf0f1"));
+
+			panel_empty1.setBackground(Color.decode("#353b48"));
+
+			label_stuInfor_id.setOpaque(true);
+			label_stuInfor_id.setBackground(Color.decode("#353b48"));
+			label_stuInfor_id.setForeground(Color.decode("#ecf0f1"));
+
+			textField_stuInfor_id.setBackground(Color.decode("#808e9b"));
+			textField_stuInfor_id.setForeground(Color.decode("#ecf0f1"));
+
+			label_stuInfor_name.setOpaque(true);
+			label_stuInfor_name.setBackground(Color.decode("#353b48"));
+			label_stuInfor_name.setForeground(Color.decode("#ecf0f1"));
+
+			textField_studInfor_name.setBackground(Color.decode("#808e9b"));
+			textField_studInfor_name.setForeground(Color.decode("#ecf0f1"));
+
+
+			label_stuInfor_pOB.setOpaque(true);
+			label_stuInfor_pOB.setBackground(Color.decode("#353b48"));
+			label_stuInfor_pOB.setForeground(Color.decode("#ecf0f1"));
+
+			comboBox_stuInfor_pOB.setOpaque(true);
+			comboBox_stuInfor_pOB.setBackground(Color.decode("#808e9b"));
+			comboBox_stuInfor_pOB.setForeground(Color.decode("#ecf0f1"));
+
+			label_stuInfor_dOB.setOpaque(true);
+			label_stuInfor_dOB.setBackground(Color.decode("#353b48"));
+			label_stuInfor_dOB.setForeground(Color.decode("#ecf0f1"));
+
+			textField_stuInfor_dOB.setBackground(Color.decode("#808e9b"));
+			textField_stuInfor_dOB.setForeground(Color.decode("#ecf0f1"));
+
+
+			label_stuInfor_sex.setOpaque(true);
+			label_stuInfor_sex.setBackground(Color.decode("#353b48"));
+			label_stuInfor_sex.setForeground(Color.decode("#ecf0f1"));
+
+			panel_male_female.setBackground(Color.decode("#353b48"));
+
+			radioButton_stuInfor_male.setBackground(Color.decode("#353b48"));
+			radioButton_stuInfor_male.setForeground(Color.decode("#ecf0f1"));
+
+			radioButton_stuInfor_female.setBackground(Color.decode("#353b48"));
+			radioButton_stuInfor_female.setForeground(Color.decode("#ecf0f1"));
+
+			panel_stuInfor_right.setBackground(Color.decode("#353b48"));
+
+			panel_empty2.setBackground(Color.decode("#353b48"));
+
+			panel_empty3.setBackground(Color.decode("#353b48"));
+
+			label_stuInfor_score1.setOpaque(true);
+			label_stuInfor_score1.setBackground(Color.decode("#353b48"));
+			label_stuInfor_score1.setForeground(Color.decode("#ecf0f1"));
+
+			textField_score1.setBackground(Color.decode("#808e9b"));
+			textField_score1.setForeground(Color.decode("#ecf0f1"));
+
+			label_stuInfor_score2.setOpaque(true);
+			label_stuInfor_score2.setBackground(Color.decode("#353b48"));
+			label_stuInfor_score2.setForeground(Color.decode("#ecf0f1"));
+
+			textField_score2.setBackground(Color.decode("#808e9b"));
+			textField_score2.setForeground(Color.decode("#ecf0f1"));
+
+			label_stuInfor_score3.setOpaque(true);
+			label_stuInfor_score3.setBackground(Color.decode("#353b48"));
+			label_stuInfor_score3.setForeground(Color.decode("#ecf0f1"));
+
+			textField_score3.setBackground(Color.decode("#808e9b"));
+			textField_score3.setForeground(Color.decode("#ecf0f1"));
+
+			label_stuInfor_total.setOpaque(true);
+			label_stuInfor_total.setBackground(Color.decode("#353b48"));
+			label_stuInfor_total.setForeground(Color.decode("#ecf0f1"));
+
+			label_total.setOpaque(true);
+			label_total.setBackground(Color.decode("#353b48"));
+			label_total.setForeground(Color.decode("#ecf0f1"));
+
+			panel_empty4.setBackground(Color.decode("#353b48"));
+
+			panel_empty5.setBackground(Color.decode("#353b48"));
+
+			//button
+			panel_button.setBackground(Color.decode("#353b48"));
+
+			button_insert.setBackground(Color.decode("#808e9b"));
+			button_insert.setForeground(Color.decode("#ecf0f1"));
+
+			button_delete.setBackground(Color.decode("#808e9b"));
+			button_delete.setForeground(Color.decode("#ecf0f1"));
+
+			button_edit.setBackground(Color.decode("#808e9b"));
+			button_edit.setForeground(Color.decode("#ecf0f1"));
+
+			button_clear.setBackground(Color.decode("#808e9b"));
+			button_clear.setForeground(Color.decode("#ecf0f1"));
+
+		} else {
+
+
+
+
+
+
+		}
 	}
 
 }
