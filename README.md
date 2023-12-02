@@ -2,7 +2,8 @@
 
 Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
 
---> Let's run the file Test.java in folder test to execute the program.
+> Let's run the file Test.java in folder test to execute the program.
+> You can open to load StudentList.data to table. This is available student list.
 
 ## Folder Structure
 

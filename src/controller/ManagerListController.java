@@ -17,8 +17,8 @@ public class ManagerListController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
 
-		if (managerListView.getButton_edit().getText().equals("Done") && cmd.equals("Done") == false) {
-			managerListView.getButton_edit().setText("Edit");
+		if (managerListView.getbtn_edit().getText().equals("Done") && cmd.equals("Done") == false) {
+			managerListView.getbtn_edit().setText("Edit");
 		}
 		if (cmd.equals("Exit")) {
 			if (JOptionPane.showConfirmDialog(managerListView, "Do you want exit the program") == JOptionPane.OK_OPTION)
