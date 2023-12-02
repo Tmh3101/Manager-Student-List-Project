@@ -1,4 +1,4 @@
-package aboutme;
+package view;
 
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
@@ -29,7 +29,7 @@ public class AboutMeView extends JFrame {
 		JLabel label_aboutme = new JLabel();
 		label_aboutme.setBounds(5, 5, 516, 493);
 		label_aboutme.setLayout(new FlowLayout());
-		label_aboutme.setIcon(new ImageIcon(AboutMeView.class.getResource("/aboutme/aboutme.png")));
+		label_aboutme.setIcon(new ImageIcon(AboutMeView.class.getResource("aboutme.png")));
 		contentPane.add(label_aboutme);
 		setVisible(true);
 	}

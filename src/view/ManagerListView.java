@@ -39,7 +39,6 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import aboutme.AboutMeView;
 import controller.ManagerListController;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
