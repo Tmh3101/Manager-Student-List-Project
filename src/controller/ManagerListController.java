@@ -48,7 +48,7 @@ public class ManagerListController implements ActionListener {
 		} else if (cmd.equals("About Me")){
 			managerListView.showMyInformation();
 		} else if(cmd.equals("Dark Mode")){
-			managerListView.onDarkMode();
+			managerListView.setDisplay();
 		}
 
 	}

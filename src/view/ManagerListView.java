@@ -398,7 +398,7 @@ public class ManagerListView extends JFrame {
 		btn_clear.addActionListener(action);
 		pnl_button.add(btn_clear);
 
-		onDarkMode();
+		setDisplay();
 		setVisible(true);
 	}
 
@@ -650,7 +650,7 @@ public class ManagerListView extends JFrame {
 		new AboutMeView();
 	}
 
-	public void onDarkMode(){
+	public void setDisplay(){
 		if(chbxItem_darkMode.isSelected()){
 			contentPane.setBackground(Color.decode("#353b48"));
 
