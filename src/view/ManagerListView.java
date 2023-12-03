@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.Dimension;
 
@@ -219,13 +220,23 @@ public class ManagerListView extends JFrame {
 		panel_center.setLayout(new GridLayout(2, 1, 0, 0));
 		panel_center.setLayout(new GridLayout(2, 1));
 
-		table = new JTable();
+		DefaultTableModel dtm = new DefaultTableModel(new Object[][] {},
+				new String[] { "ID", "Name", "Birth Palce", "Birth Day", "Sex", "Score 1", "Score 2", "Score 3" }){
+
+			public boolean isCellEditable(int row, int column){
+				return false;
+			}
+
+		};
+
+		table = new JTable(dtm);
 		table.setFont(default_font);
-		table.setModel(new DefaultTableModel(new Object[][] {},
-				new String[] { "ID", "Name", "Birth Palce", "Birth Day", "Sex", "Score 1", "Score 2", "Score 3" }));
+		//table.setModel(new DefaultTableModel(new Object[][] {},
+		//		new String[] { "ID", "Name", "Birth Palce", "Birth Day", "Sex", "Score 1", "Score 2", "Score 3" }));
 		table.getColumnModel().getColumn(1).setPreferredWidth(150);
 		table.getColumnModel().getColumn(2).setPreferredWidth(110);
 		table.getColumnModel().getColumn(3).setPreferredWidth(110);
+		table.setRowHeight(25);
 		table.getTableHeader().setReorderingAllowed(false);
 		
 		
@@ -815,7 +826,6 @@ public class ManagerListView extends JFrame {
 			for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
                 table.getColumnModel().getColumn(i).setCellRenderer(dtcr);
             }
-
 
 			//infor
 			pnl_stuInfor.setBackground(Color.decode("#ecf0f1"));
