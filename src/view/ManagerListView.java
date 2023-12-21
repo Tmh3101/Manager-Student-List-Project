@@ -501,7 +501,7 @@ public class ManagerListView extends JFrame {
 			if (student != null) {
 				managerListModel.insert(student);
 				DefaultTableModel dtm = (DefaultTableModel) table.getModel();
-				dtm.addRow(new Object[] { student.getId(), student.getName(), student.getBirthPlace(),
+				dtm.addRow(new Object[] { student.getId(), student.getFullname(), student.getBirthPlace(),
 						student.getBirthDay().getDate() + "/" + (student.getBirthDay().getMonth() + 1) + "/"
 								+ (student.getBirthDay().getYear() + 1900),
 						(student.isSex_isMale()) ? "Male" : "Female", student.getScore1(), student.getScore2(),
@@ -517,7 +517,7 @@ public class ManagerListView extends JFrame {
 		try {
 			Student student = getSelectedStudent();
 			txtfld_stuInfor_id.setText(student.getId());
-			txtfld_studInfor_name.setText(student.getName());
+			txtfld_studInfor_name.setText(student.getFullname());
 			cmbbx_stuInfor_pOB.setSelectedIndex(managerListModel.getProvinceList().getIndexOf(student.getBirthPlace()) + 1);
 			txtfld_stuInfor_dOB.setText(student.getBirthDay().getDate() + "/"
 					+ (student.getBirthDay().getMonth() + 1) + "/" + (student.getBirthDay().getYear() + 1900));
@@ -549,7 +549,7 @@ public class ManagerListView extends JFrame {
 		managerListModel.getStudentList().get(table.getSelectedRow()).edit(student);
 		int i = 0;
 		dtm.setValueAt(student.getId(), table.getSelectedRow(), i++);
-		dtm.setValueAt(student.getName(), table.getSelectedRow(), i++);
+		dtm.setValueAt(student.getFullname(), table.getSelectedRow(), i++);
 		dtm.setValueAt(student.getBirthPlace(), table.getSelectedRow(), i++);
 		dtm.setValueAt(student.getBirthDay().getDate() + "/" + (student.getBirthDay().getMonth() + 1) + "/"
 				+ (student.getBirthDay().getYear() + 1900), table.getSelectedRow(), i++);
@@ -580,7 +580,7 @@ public class ManagerListView extends JFrame {
 		dtm.setRowCount(0);
 
 		for (Student student : list) {
-			dtm.addRow(new Object[] { student.getId(), student.getName(), student.getBirthPlace(),
+			dtm.addRow(new Object[] { student.getId(), student.getFullname(), student.getBirthPlace(),
 					student.getBirthDay().getDate() + "/" + (student.getBirthDay().getMonth() + 1) + "/"
 							+ (student.getBirthDay().getYear() + 1900),
 					(student.isSex_isMale()) ? "Male" : "Female", student.getScore1(), student.getScore2(),
