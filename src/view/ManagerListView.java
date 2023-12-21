@@ -54,8 +54,7 @@ public class ManagerListView extends JFrame {
 	private JComboBox<String> cmbbx_stuInfor_pOB;
 	private ButtonGroup bg_sex;
 	private JLabel lbl_total;
-	private JRadioButton rdbtn_stuInfor_male;
-	private JRadioButton rdbtn_stuInfor_female;
+	private JRadioButton rdbtn_stuInfor_male, rdbtn_stuInfor_female;
 	private JComboBox<String> cmbx_filter_pOB;
 
 
@@ -106,6 +105,7 @@ public class ManagerListView extends JFrame {
 	public ManagerListView() {
 
 		managerListModel = new ManagerListModel();
+		ManagerListController action = new ManagerListController(this);
 		setTitle("Manager Student List");
 		setIconImage(Toolkit.getDefaultToolkit().createImage(ManagerListView.class.getResource("icon_list.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -118,7 +118,6 @@ public class ManagerListView extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 
-		ManagerListController action = new ManagerListController(this);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -653,7 +652,6 @@ public class ManagerListView extends JFrame {
 		if(chbxItem_darkMode.isSelected()){
 			contentPane.setBackground(Color.decode("#353b48"));
 
-			//filter
 			pnl_filter.setBackground(Color.decode("#353b48"));
 			lbl_stuFilter.setForeground(Color.decode("#ecf0f1"));
 			lbl_pOBFilter.setForeground(Color.decode("#ecf0f1"));
@@ -683,8 +681,6 @@ public class ManagerListView extends JFrame {
                 table.getColumnModel().getColumn(i).setCellRenderer(dtcr);
             }
 
-
-			//infor
 			pnl_stuInfor.setBackground(Color.decode("#353b48"));
 
 			pnl_stuInfor_left.setBackground(Color.decode("#353b48"));
