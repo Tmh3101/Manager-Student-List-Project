@@ -8,15 +8,15 @@ public class Student implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private String id;
-	private String name;
+	private String fullname;
 	private Province birthPlace;
 	private Date birthDay;
 	private boolean sex_isMale;
-	private float score1, score2, score3;
+	private double score1, score2, score3;
 	
 	public Student() {
 		id = new String();
-		name = new String();
+		fullname = new String();
 		birthPlace = new Province();
 		birthDay = new Date();
 		sex_isMale = true;
@@ -25,9 +25,9 @@ public class Student implements Serializable{
 		score3 = 0;
 	}
 
-	public Student(String code, String name, Province birthPlace, Date birthDay, boolean sex_isMale, float score1, float score2, float score3) {
+	public Student(String code, String fullname, Province birthPlace, Date birthDay, boolean sex_isMale, double score1, double score2, double score3) {
 		this.id = code;
-		this.name = name;
+		this.fullname = fullname;
 		this.birthPlace = new Province(birthPlace);
 		this.birthDay = birthDay;
 		this.sex_isMale = sex_isMale;
@@ -38,7 +38,7 @@ public class Student implements Serializable{
 
 	public Student(Student student) {
 		id = student.id;
-		name = student.name;
+		fullname = student.fullname;
 		birthPlace = student.birthPlace;
 		birthDay = student.birthDay;
 		sex_isMale = student.sex_isMale;
@@ -55,12 +55,12 @@ public class Student implements Serializable{
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getFullname() {
+		return fullname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
 	}
 
 	public Province getBirthPlace() {
@@ -87,33 +87,33 @@ public class Student implements Serializable{
 		this.sex_isMale = sex_isMale;
 	}
 
-	public float getScore1() {
+	public double getScore1() {
 		return score1;
 	}
 
-	public void setScore1(float score1) {
+	public void setScore1(double score1) {
 		this.score1 = score1;
 	}
 
-	public float getScore2() {
+	public double getScore2() {
 		return score2;
 	}
 
-	public void setScore2(float score2) {
+	public void setScore2(double score2) {
 		this.score2 = score2;
 	}
 
-	public float getScore3() {
+	public double getScore3() {
 		return score3;
 	}
 
-	public void setScore_3(float score3) {
+	public void setScore_3(double score3) {
 		this.score3 = score3;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(birthDay, birthPlace, id, name, score1, score2, score3, sex_isMale);
+		return Objects.hash(birthDay, birthPlace, id, fullname, score1, score2, score3, sex_isMale);
 	}
 
 	@Override
@@ -126,16 +126,17 @@ public class Student implements Serializable{
 			return false;
 		Student other = (Student) obj;
 		return Objects.equals(birthDay, other.birthDay) && Objects.equals(birthPlace, other.birthPlace)
-				&& id == other.id && Objects.equals(name, other.name)
-				&& Float.floatToIntBits(score1) == Float.floatToIntBits(other.score1)
-				&& Float.floatToIntBits(score2) == Float.floatToIntBits(other.score2)
-				&& Float.floatToIntBits(score3) == Float.floatToIntBits(other.score3)
+				&& id == other.id && Objects.equals(fullname, other.fullname)
+				&& Double.doubleToLongBits(score1) == Double.doubleToLongBits(other.score1)
+				&& Double.doubleToLongBits(score2) == Double.doubleToLongBits(other.score2)
+				&& Double.doubleToLongBits(score3) == Double.doubleToLongBits(other.score3)
 				&& sex_isMale == other.sex_isMale;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public String toString() {
-		return "Student [ID=" + id + ", name=" + name + ", birthPlace=" + birthPlace + ", birthDay=" + birthDay
+		return "[ID=" + id + ", fullname=" + fullname + ", birthPlace=" + birthPlace + ", birthDay=" + birthDay.getDate() + "/" + (birthDay.getMonth() + 1) + "/" + (birthDay.getYear() + 1900)
 				+ ", sex_isMale=" + sex_isMale + ", score1=" + score1 + ", score2=" + score2 + ", score3="
 				+ score3 + "]";
 	}
@@ -143,7 +144,7 @@ public class Student implements Serializable{
 	
 	public void edit(Student student) {
 		id = student.id;
-		name = student.name;
+		fullname = student.fullname;
 		birthPlace = student.birthPlace;
 		birthDay = student.birthDay;
 		sex_isMale = student.sex_isMale;
